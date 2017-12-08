@@ -1,8 +1,24 @@
 window.onload = function() {
 
+
+var characters = ['char 1', 'char 2', 'char 3'];
+
+var characters = { "name":"character 1", "hp":100, "ap":30, "cap":null }
+
+
+
+var characters = [    
+    {"name":"character 1", "hp":110, "ap":40, "cap":31},    
+    {"name":"character 2", "hp":120, "ap":30, "cap":32},  
+    {"name":"character 3", "hp":130, "ap":20, "cap":33},    
+    {"name":"character 4", "hp":140, "ap":10, "cap":34}   
+]  
+
+
+console.log(characters[0].hp);
+
+// console.log(object.hp);
 var health = 100;
-
-
 console.log(health);
 progress(health, $('#lifeBar'));
 
