@@ -1,9 +1,6 @@
 window.onload = function() {
 
 
-var characters = ['char 1', 'char 2', 'char 3'];
-
-
 var characters = [    
     {"name":"character 1", "hp":110, "ap":40, "cap":31, "image":""},    
     {"name":"character 2", "hp":120, "ap":30, "cap":32, "image":""},  
@@ -12,8 +9,26 @@ var characters = [
 ]  
 
 
-console.log(characters[0].hp);
-console.log(characters[0].name);
+
+// console.log(characters[0].hp);
+// console.log(characters[0].name);
+
+
+$.each( characters, function( key, value ) {
+  console.log(key, value);
+});
+
+
+var $div = $("<div>", {id: "test", "class": "a"});
+$div.html("hello");
+$div.click(function(){ console.log("clicked")});
+$("#characters").append($div);
+
+
+
+
+
+
 
 // console.log(object.hp);
 var health = 100;
