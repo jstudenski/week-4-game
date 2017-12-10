@@ -1,5 +1,6 @@
 body {
-  background-color: salmon;
+  background-color: #999;
+  font-family: 'Barlow Semi Condensed', sans-serif;
 }
 
 #notification {
@@ -20,12 +21,40 @@ body {
 }
 
 #lifeBar div {
-    height: 100%;
-    color: #fff;
-    text-align: right;
-    line-height: 22px; /* same as #progressBar height if we want text middle aligned */
-    width: 0;
-    background-color: lime;
+  height: 100%;
+  color: #fff;
+  text-align: right;
+  line-height: 22px; /* same as #progressBar height if we want text middle aligned */
+  width: 0;
+  background-color: lime;
 }
+
+.attack {
+  display: inline-block;
+  height: 32px;
+  border-radius: 20px;
+  color: #fff;
+  padding: 8px;
+  box-sizing: border-box;
+  text-transform: uppercase;
+  font-weight: 800;
+  letter-spacing: .5px;
+}
+
+.attack p {
+  display: inline;
+  padding-left: 8px;
+  padding-right: 8px;
+}
+
+.fire {background-color: #f94c00;}
+.tint {background-color: #3498db;}
+.bolt {background-color: #f1c40f;}
+.leaf {background-color: #34bd77;}
+
+
+
+
+
 
 
