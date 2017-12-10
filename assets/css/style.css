@@ -13,21 +13,7 @@ body {
   box-sizing: border-box;
 }
 
-#lifeBar {
-  width: 200px;
-  height: 20px;
-  border: 1px solid #111;
-  background-color: #292929;
-}
 
-#lifeBar div {
-  height: 100%;
-  color: #fff;
-  text-align: right;
-  line-height: 22px; /* same as #progressBar height if we want text middle aligned */
-  width: 0;
-  background-color: lime;
-}
 
 .attack {
   display: inline-block;
@@ -52,9 +38,54 @@ body {
 .bolt {background-color: #f1c40f;}
 .leaf {background-color: #34bd77;}
 
+#characters {
+  background-color: #71d0ff;
+  width: 450px;
+  height: 115px;
+}
+
+#enemies {
+  background-color: tomato;
+  width: 450px;
+  height: 115px;
+}
+
+
+.character {
+  width: 100px;
+  height: 100px;
+  background-color: #f1f1f1;
+  float: left;
+  margin: 5px; 
+}
+
+#your-character {
+  width: 450px;
+  height: 115px; 
+  background-color: yellow;
+}
+
+#defender {
+  width: 450px;
+  height: 115px; 
+  background-color: pink;
+}
 
 
 
+.life-bar {
+  width: 100px;
+  height: 20px;
+  border: 1px solid #111;
+  background-color: #292929;
+  box-sizing: border-box;
+}
 
-
-
+.life-bar div {
+  height: 100%;
+  color: #fff;
+  text-align: right;
+  line-height: 22px; /* same as #progressBar height if we want text middle aligned */
+  width: 0;
+  background-color: lime;
+}
