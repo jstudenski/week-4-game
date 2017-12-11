@@ -2,10 +2,10 @@ window.onload = function() {
 
 
 var characters = [    
-  {"name":"character1", "hp":110, "ap":40, "cap":31, "image":""},    
-  {"name":"character2", "hp":120, "ap":30, "cap":32, "image":""},  
-  {"name":"character3", "hp":130, "ap":20, "cap":33, "image":""},    
-  {"name":"character4", "hp":140, "ap":10, "cap":34, "image":""}
+  {"name":"Pikachu", "hp":110, "ap":40, "cap":31, "image":"", "attack":"bolt"},    
+  {"name":"Squirtle", "hp":120, "ap":30, "cap":32, "image":"", "attack":"tint"},  
+  {"name":"Charmander", "hp":130, "ap":20, "cap":33, "image":"", "attack":"fire"},    
+  {"name":"Bulbasaur", "hp":140, "ap":10, "cap":34, "image":"", "attack":"leaf"}
 ];
 var characterIndex;
 var defenderIndex;
@@ -25,78 +25,56 @@ $.each( characters, function( key, value ) {
   $div.append("<br>HP: " + characters[key].hp);
   $div.append('<div class="life-bar"><div></div></div>');
 
-
-  // $div.click(function(){ 
-  //   characterIndex = key;
-  //   chooseCharacter(this);
-  // });
-
   $("#characters").append($div);
 });
 
 
 
-// stage 1 - Pick Your Character
-function chooseCharacter(selected) {
-  $(selected).appendTo("#your-character");
 
-
-  // Move ramaining characters to enemies
-  var enemies = $("#characters").children();
-
-  // stage 2 - Pick Your Enemy 
-  enemies.click(function(){ 
-    // console.log(this);
-    
-    console.log("**" + this.id);
-
-    $(this).appendTo("#defender");
-
-
-    $("#attack-button").html("Attack!");
-    $("#attack-button").css("background-color","#000");
-    $("#attack-button").css("color","#fff"); 
-    $("#attack-button").css("width","100px"); 
-    $("#attack-button").css("height","30px"); 
-
-  });
-
-  enemies.appendTo("#enemies");
-}
-
-
-$("#attack-button").click(function() {
-  console.log("Handler for .click() called.");
- //  $("#your-character");
-  console.log("characterIndex: "+characterIndex);
-  console.log("character name: "+characters[characterIndex].name); 
-});
-
-
-
-
+$("#notification").html("choose a character");
 
 $(".character").click(function() {
 
   // pick a character
   if (characterIndex === undefined) {
-    characterIndex = $(this).attr('number')
+    characterIndex = $(this).attr('number');
     console.log(characterIndex);
     // Move your character to your character area
     $("[number='" + characterIndex + "']").appendTo("#your-character");
     // Move ramaining characters to enemies area
     $("#characters").children().appendTo("#enemies");
-  } else if (defenderIndex === undefined) {
-    
+    $("#notification").html("pick an opponant");
+  } else if (defenderIndex === undefined) {  // pick defender
+
+    if (characterIndex === $(this).attr('number')) {
+      $("#notification").html("pick opponant from enemies");
+      return
+    }
+    defenderIndex = $(this).attr('number');
     $(this).appendTo("#defender");
+    $("#notification").html(characters[characterIndex].name + " -vs- " + characters[defenderIndex].name + " .. click attack to fight!");
+
+    // set unique attack button
+    var attack = characters[characterIndex].attack
+    $("#attack").addClass(attack);
+    $("#attack").append("<i></i>");
+    $("#attack i").addClass("fas fa-"+attack);
+    $("#attack").append("<p>Attack</>");
+    
   }
 
-
-
-  // pick an enemy
-
-
 });
+
+$("#attack-button").click(function() {
+  console.log(characters[characterIndex].name + " -vs- " + characters[defenderIndex].name);
+});
+
+
+
+
+
+
+
 
 
 // characters[0].health = 100;

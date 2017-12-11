@@ -15,7 +15,7 @@ body {
 
 
 
-.attack {
+#attack {
   display: inline-block;
   height: 32px;
   border-radius: 20px;
@@ -27,7 +27,7 @@ body {
   letter-spacing: .5px;
 }
 
-.attack p {
+#attack p {
   display: inline;
   padding-left: 8px;
   padding-right: 8px;
