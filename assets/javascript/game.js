@@ -15,18 +15,18 @@ var enemyIndex;
 // console.log(characters[0].name);
 
 $.each( characters, function( key, value ) {
-  console.log(characters[key].name);
-  var $div = $("<div>", {id: characters[key].name, "class": "character"});
+
+  var $div = $("<div>", {"index": key, "class": "character"});
   $div.html(characters[key].name);
 
   $div.append("<br>HP: " + characters[key].hp);
 
-  $div.append('<div class="life-bar" id="' +characters[key].name+ 'life"><div></div></div>');
+  $div.append('<div class="life-bar" id="life' +key+ '""><div></div></div>');
 
- // console.log(characters[key].ap);
+  console.log("key: "+key);
 
   $div.click(function(){ 
-    selectedCharacter = key;
+    characterIndex = key;
     chooseCharacter(this);
   });
 
@@ -34,10 +34,18 @@ $.each( characters, function( key, value ) {
 });
 
 
-progress(100, $('#character1life'));
-progress(90, $('#character2life'));
-progress(80, $('#character3life'));
-progress(70, $('#character4life'));
+progress(100, $("#life0"));
+progress(95, $("#life1"));
+progress(90, $("#life2"));
+progress(85, $("#life3"));
+
+
+// progress(90, $("[index|='0']"));
+// progress(80, $("[index|='1']"));
+// progress(70, $("[index|='2']"));
+
+
+
 
 
 // stage 1 - Pick Your Character
@@ -69,9 +77,20 @@ function chooseCharacter(selected) {
 }
 
 
-$( "#attack-button" ).click(function() {
+$("#attack-button").click(function() {
   console.log("Handler for .click() called.");
-  $("#your-character");
+ //  $("#your-character");
+  console.log("characterIndex: "+characterIndex);
+  console.log("character name: "+characters[characterIndex].name); 
+});
+
+
+// characterChosen
+$(".character").click(function() {
+
+
+
+
 
 });
 
@@ -82,41 +101,13 @@ $( "#attack-button" ).click(function() {
 
 
 
-
-
-// // console.log(object.hp);
-// var health = 100;
-// // console.log(health);
-// progress(health, $('#lifeBar'));
-
-//   $("#plus").on("click", function() {
-//       if (health < 100) {
-//         health+=10
-//         console.log(health);  
-//         progress(health, $('#lifeBar'));    
-//       }
-
-//   });
-
-//   $("#minus").on("click", function() {
-//       if (health > 0) {
-//         health-=10
-//         console.log(health); 
-//         progress(health, $('#lifeBar'));
-//       }
-//   });
-
-
 function progress(percent, $element) {
 
     console.log("worked", percent, $element);
 
-
     var progressBarWidth = percent * $element.width() / 100;
     $element.find('div').animate({ width: progressBarWidth }, 300);  //.html(percent + "% ")
     
-   // $("#notification").html(percent);
-
     if (percent === 100) {
       $element.find('div').css("background-color", "#4caf50"); // green
     } else if (percent > 60) {
@@ -133,10 +124,7 @@ function progress(percent, $element) {
       $element.find('div').css("background-color", "#f44336"); // red
     }
 
-    
 }
-
-
 
 
 } // window.onload
