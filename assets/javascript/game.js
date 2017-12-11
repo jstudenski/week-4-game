@@ -40,11 +40,6 @@ progress(80, $('#character3life'));
 progress(70, $('#character4life'));
 
 
-
-
-
-
-
 // stage 1 - Pick Your Character
 function chooseCharacter(selected) {
   $(selected).appendTo("#your-character");
