@@ -8,43 +8,31 @@ var characters = [
   {"name":"character4", "hp":140, "ap":10, "cap":34, "image":""}
 ];
 var characterIndex;
-var enemyIndex;
+var defenderIndex;
+
 
 
 // console.log(characters[0].hp);
 // console.log(characters[0].name);
 
 $.each( characters, function( key, value ) {
+  // set characters health equal to total hp
+  value.health=value.hp;
 
-  var $div = $("<div>", {"index": key, "class": "character"});
+  // add characters to html
+  var $div = $("<div>", {"number": key, "class": "character"});
   $div.html(characters[key].name);
-
   $div.append("<br>HP: " + characters[key].hp);
+  $div.append('<div class="life-bar"><div></div></div>');
 
-  $div.append('<div class="life-bar" id="life' +key+ '""><div></div></div>');
 
-  console.log("key: "+key);
-
-  $div.click(function(){ 
-    characterIndex = key;
-    chooseCharacter(this);
-  });
+  // $div.click(function(){ 
+  //   characterIndex = key;
+  //   chooseCharacter(this);
+  // });
 
   $("#characters").append($div);
 });
-
-
-progress(100, $("#life0"));
-progress(95, $("#life1"));
-progress(90, $("#life2"));
-progress(85, $("#life3"));
-
-
-// progress(90, $("[index|='0']"));
-// progress(80, $("[index|='1']"));
-// progress(70, $("[index|='2']"));
-
-
 
 
 
@@ -85,46 +73,71 @@ $("#attack-button").click(function() {
 });
 
 
-// characterChosen
+
+
+
 $(".character").click(function() {
 
+  // pick a character
+  if (characterIndex === undefined) {
+    characterIndex = $(this).attr('number')
+    console.log(characterIndex);
+    // Move your character to your character area
+    $("[number='" + characterIndex + "']").appendTo("#your-character");
+    // Move ramaining characters to enemies area
+    $("#characters").children().appendTo("#enemies");
+  } else if (defenderIndex === undefined) {
+    
+    $(this).appendTo("#defender");
+  }
 
 
+
+  // pick an enemy
 
 
 });
 
 
+// characters[0].health = 100;
+// characters[1].health = 50;
+// characters[2].health = 50;
+// characters[3].health = 50;
 
 
+updateLife(0);
+updateLife(1);
+updateLife(2);
+updateLife(3);
 
-
-
-
-function progress(percent, $element) {
-
-    console.log("worked", percent, $element);
-
-    var progressBarWidth = percent * $element.width() / 100;
-    $element.find('div').animate({ width: progressBarWidth }, 300);  //.html(percent + "% ")
-    
-    if (percent === 100) {
-      $element.find('div').css("background-color", "#4caf50"); // green
-    } else if (percent > 60) {
-      $element.find('div').css("background-color", "#8bc34a"); // lime
-    } else if (percent > 40) {
-      $element.find('div').css("background-color", "#ffeb3b"); // yellow
-    } else if (percent > 30) {
-      $element.find('div').css("background-color", "#ffc107"); // light orange
-    } else if (percent > 20) {
-      $element.find('div').css("background-color", "#ff9800"); // orange
-    } else if (percent > 10) {
-      $element.find('div').css("background-color", "#ff5722"); // tomato
-    } else {
-      $element.find('div').css("background-color", "#f44336"); // red
-    }
-
+function updateLife(number) {
+  // find character health
+  var percentHealth = characters[number].health/characters[number].hp*100;
+  // identify character life-bar
+  var $element = $("[number='" + number + "'] .life-bar");
+  // set width of life-bar
+  var progressBarWidth = percentHealth * $element.width()/100;
+  $element.find('div').animate({ width: progressBarWidth }, 300);
+  // color accordingly
+  if (percentHealth === 100) {
+    $element.find('div').css("background-color", "#4caf50"); // green
+  } else if (percentHealth > 60) {
+    $element.find('div').css("background-color", "#8bc34a"); // lime
+  } else if (percentHealth > 40) {
+    $element.find('div').css("background-color", "#ffeb3b"); // yellow
+  } else if (percentHealth > 30) {
+    $element.find('div').css("background-color", "#ffc107"); // light orange
+  } else if (percentHealth > 20) {
+    $element.find('div').css("background-color", "#ff9800"); // orange
+  } else if (percentHealth > 10) {
+    $element.find('div').css("background-color", "#ff5722"); // tomato
+  } else {
+    $element.find('div').css("background-color", "#f44336"); // red
+  }
 }
+
+
+
 
 
 } // window.onload
