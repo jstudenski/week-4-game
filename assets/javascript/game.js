@@ -7,6 +7,9 @@ var characters = [
   {"name":"character3", "hp":130, "ap":20, "cap":33, "image":""},    
   {"name":"character4", "hp":140, "ap":10, "cap":34, "image":""}
 ];
+var characterIndex;
+var enemyIndex;
+
 
 // console.log(characters[0].hp);
 // console.log(characters[0].name);
@@ -20,19 +23,23 @@ $.each( characters, function( key, value ) {
 
   $div.append('<div class="life-bar" id="' +characters[key].name+ 'life"><div></div></div>');
 
-  console.log(characters[key].ap);
+ // console.log(characters[key].ap);
 
   $div.click(function(){ 
+    selectedCharacter = key;
     chooseCharacter(this);
   });
 
   $("#characters").append($div);
 });
 
-  progress(100, $('#character1life'));
-  progress(90, $('#character2life'));
-  progress(80, $('#character3life'));
-  progress(70, $('#character4life'));
+
+progress(100, $('#character1life'));
+progress(90, $('#character2life'));
+progress(80, $('#character3life'));
+progress(70, $('#character4life'));
+
+
 
 
 
@@ -41,12 +48,19 @@ $.each( characters, function( key, value ) {
 // stage 1 - Pick Your Character
 function chooseCharacter(selected) {
   $(selected).appendTo("#your-character");
+
+
   // Move ramaining characters to enemies
   var enemies = $("#characters").children();
 
   // stage 2 - Pick Your Enemy 
   enemies.click(function(){ 
+    // console.log(this);
+    
+    console.log("**" + this.id);
+
     $(this).appendTo("#defender");
+
 
     $("#attack-button").html("Attack!");
     $("#attack-button").css("background-color","#000");
@@ -59,8 +73,11 @@ function chooseCharacter(selected) {
   enemies.appendTo("#enemies");
 }
 
+
 $( "#attack-button" ).click(function() {
-  console.log( "Handler for .click() called.");
+  console.log("Handler for .click() called.");
+  $("#your-character");
+
 });
 
 
