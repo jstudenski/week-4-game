@@ -23,7 +23,8 @@ $.each( characters, function( key, value ) {
   var $div = $("<div>", {"number": key, "class": "character"});
   $div.html('<h3>' + characters[key].name + '</h3>');
   $div.append('<div class="container"><div class="charimg"><img src="assets/images/' + characters[key].name + '.gif"></div></div>');
-  $div.append("HP: " + characters[key].hp);
+
+  $div.append('<div class="hp-area"></div>');
   $div.append('<div class="life-bar"><div></div></div>');
   $("#characters").append($div);
    // set life bar
@@ -67,8 +68,8 @@ $(".character").click(function() {
     }
     defenderIndex = $(this).attr('number');
     $(this).appendTo("#defender");
-    $("#notification").html(characters[characterIndex].name + " -vs- " + characters[defenderIndex].name + " .. click attack to fight!");
-
+    $("#notification").html("Click attack to fight!");
+    $("#battle-update h4").html(characters[characterIndex].name + " -vs- " + characters[defenderIndex].name);
     $("#attack").show();
 
   }
@@ -131,6 +132,10 @@ $("#attack").click(function() {
 
 
 function updateLife(number) {
+
+
+  $("[number='" + number + "'] .hp-area").html("HP:" + characters[number].health +"/"+characters[number].hp);
+
   // find character health
   var percentHealth = characters[number].health/characters[number].hp*100;
   // identify character life-bar
@@ -140,7 +145,7 @@ function updateLife(number) {
   $element.find('div').animate({ width: progressBarWidth }, 300);
   // color accordingly
   if (percentHealth === 100) {
-    $element.find('div').css("background-color", "#4caf50"); // green
+    bgColor("#4caf50")
   } else if (percentHealth > 60) {
     $element.find('div').css("background-color", "#8bc34a"); // lime
   } else if (percentHealth > 40) {
@@ -153,6 +158,11 @@ function updateLife(number) {
     $element.find('div').css("background-color", "#ff5722"); // tomato
   } else {
     $element.find('div').css("background-color", "#f44336"); // red
+  }
+
+
+  function bgColor(color) {
+    $element.find('div').css("background-color", color); // green
   }
 }
 

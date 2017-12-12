@@ -11,26 +11,29 @@ body {
   color: #ffffff;
   padding: 8px;
   box-sizing: border-box;
+  margin-bottom: 10px;
 }
 
 
 
 #attack {
   display: inline-block;
-  height: 32px;
-  border-radius: 20px;
+  border-radius: 5px;
   color: #fff;
-  padding: 8px;
+  padding: 7px;
   box-sizing: border-box;
   text-transform: uppercase;
   font-weight: 800;
   letter-spacing: .5px;
+  display: block;
+  width: 100px;
+  margin: auto;
 }
 
+
 #attack p {
-  display: inline;
+  display: inline-block;
   padding-left: 8px;
-  padding-right: 8px;
 }
 
 .fire {background-color: #f94c00;}
@@ -40,7 +43,7 @@ body {
 
 #characters {
   background-color: #71d0ff;
-  width: 450px;
+  width: 470px;
   height: 130px;
 }
 
@@ -57,7 +60,7 @@ body {
   height: 110px;
   background-color: #f1f1f1;
   float: left;
-  margin: 5px; 
+  margin: 7px; 
   border: 1px solid #272727;
   box-sizing: border-box;
 }
@@ -73,19 +76,60 @@ body {
 
 
 
+.arena {
+  width: 400px;
+  height: 147px;
+  border: 1px solid #272727;
+  border-radius: 11px;
+  box-sizing: border-box;
+  background: salmon;
+  overflow: hidden;
+}
 
+.button-area {
+  height: 30px;
+  width: 100%;
+  padding: 5px;
+  background-color: #8a8a8a;
+}
 
 #your-character {
   width: 115px;
-  height: 130px; 
+  height: 145px;
   background-color: yellow;
+  float: left;
 }
 
 #defender {
   width: 115px;
-  height: 130px; 
+  height: 145px;
   background-color: pink;
+  float: right;
 }
+
+#battle-update {
+  width: 168px;;
+  height: 145px;
+  background-color: #b7b7b7;
+  float: left;
+}
+
+#your-character p, #defender p, #battle-update h4{
+  font-size: 14px;
+  color: #fff;
+  text-transform: uppercase;
+  background-color: #585858;
+  padding: 4px;
+  text-align: center;
+}
+
+/*#your-character p {
+  border-radius: 10px 0px 0px 10px;
+}
+#defender p {
+  border-radius: 0px 10px 10px 0px;
+}*/
+
 
 
 
@@ -101,16 +145,22 @@ body {
 
 .life-bar div {
   height: 100%;
-/*  color: #fff;*/
-/*  text-align: right;*/
-  /*line-height: 22px;*/ /* same as #progressBar height if we want text middle aligned */
-/*  width: 0;*/
-/*  background-color: lime;*/
+}
+
+
+.hp-area {
+  height: 17px;
+  width: 100%;
+  background-color: #fff;
+  box-sizing: border-box;
+  border-top: 1px solid #272727;
+  color: #000;
+  text-align: center;
 }
 
 .container {
   background-color: blue;
-  height: 60px;
+  height: 63px;
   position: relative;
 }
 
@@ -128,5 +178,6 @@ body {
   margin-left: auto;
   margin-right: auto;
 }
+
 
 
