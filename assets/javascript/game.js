@@ -12,24 +12,24 @@ var defenderIndex;
 
 
 
+$("#notification").html("Choose a character");
+$("#attack").hide();
+
 
 $.each( characters, function( key, value ) {
   // set characters health equal to total hp
   value.health=value.hp;
-
   // add characters to html
   var $div = $("<div>", {"number": key, "class": "character"});
-  $div.html(characters[key].name);
-  $div.append('<br><div class="charimg"><img src="assets/images/' + characters[key].name + '.gif"></div>');
+  $div.html('<h3>' + characters[key].name + '</h3>');
+  $div.append('<div class="container"><div class="charimg"><img src="assets/images/' + characters[key].name + '.gif"></div></div>');
   $div.append("HP: " + characters[key].hp);
   $div.append('<div class="life-bar"><div></div></div>');
-
   $("#characters").append($div);
+   // set life bar
+  updateLife(key);
 });
 
-$("#attack").hide();
-
-$("#notification").html("Choose a character");
 
 $(".character").click(function() {
 
@@ -41,6 +41,7 @@ $(".character").click(function() {
 
     // Move your character to your character area
     $("[number='" + characterIndex + "']").appendTo("#your-character");
+       // $("[number='" + characterIndex + "'] .charimg").html('<p>123</p>');
     $("[number='" + characterIndex + "'] .charimg").html('<img src="assets/images/' + characters[characterIndex].name + 'back.gif">');
 
 
@@ -70,17 +71,15 @@ $(".character").click(function() {
 
     $("#attack").show();
 
-
-    
-
   }
 
 });
 
 
 
-$("#attack").click(function() {
 
+$("#attack").click(function() {
+ 
 
   console.log(characters);
   console.log("Attack: "+characters[characterIndex].ap);
@@ -108,6 +107,9 @@ $("#attack").click(function() {
     return;
 
   } 
+  // shake if hit
+  $("[number='" + characterIndex + "'] .charimg").effect( "shake", {times:2, distance: 2}, 400 );
+
 
   // take counter attack
   characters[characterIndex].health -= characters[defenderIndex].cap;
@@ -122,15 +124,11 @@ $("#attack").click(function() {
 
 
 
-
 });
 
 
 
-updateLife(0);
-updateLife(1);
-updateLife(2);
-updateLife(3);
+
 
 function updateLife(number) {
   // find character health
