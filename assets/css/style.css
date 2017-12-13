@@ -28,6 +28,28 @@ body {
   margin: auto;
 }
 
+#my-damage {
+  color: #ca0404;
+  font-weight: 600;
+  margin-top: 51px;
+  margin-left: 45px;
+  font-size: 20px;
+  z-index: 1;
+  position: absolute;
+}
+
+#opponent-damage {
+  color: #ca0404;
+  font-weight: 600;
+  margin-top: 51px;
+  margin-left: 45px;
+  font-size: 20px;
+  z-index: 1;
+  position: absolute;
+}
+
+
+
 
 #attack p {
   display: inline-block;

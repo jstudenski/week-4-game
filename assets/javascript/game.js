@@ -65,8 +65,8 @@ $(".character").click(function() {
     $("#attack i").addClass("fas fa-"+attack);
     $("#attack").append("<p>Attack</>");
   
-
-  } else if (defenderIndex === undefined) {  // Pick new defender
+  // Pick new defender
+  } else if (defenderIndex === undefined) {  
 
     if (characterIndex === $(this).attr('number')) {
       $("#notification").html("Choose opponant from enemies");
@@ -79,23 +79,26 @@ $(".character").click(function() {
     $("#notification").html("Click attack to fight!");
     $("#battle-update h4").html(characters[characterIndex].name + " -vs- " + characters[defenderIndex].name);
     $("#attack").fadeIn(300);
-
   }
+
 
 });
 
 
 
-
 $("#attack").click(function() {
  
-  console.log(characters);
-  console.log("Attack: "+characters[characterIndex].ap);
-  console.log("Enemy Attack: "+characters[defenderIndex].cap);
+  // console.log(characters);
+  // console.log("Attack: "+characters[characterIndex].ap);
+  // console.log("Enemy Attack: "+characters[defenderIndex].cap);
 
-  // attack defender
+  // attack
+  shake(defenderIndex);
+  animateDamage("#opponent-damage", characters[characterIndex].ap);
+  // enemy take damage
   characters[defenderIndex].health -= characters[characterIndex].ap; 
   updateLife(defenderIndex);
+
 
   // see if defender was defeated
   if (characters[defenderIndex].health <= 0) {
@@ -113,17 +116,20 @@ $("#attack").click(function() {
       $("#notification").html("YOU WIN!!!");
       $("#attack").fadeOut(200);
     }
-
     return;
-
   } 
-  // shake if hit
-  $("[number='" + characterIndex + "'] .charimg").effect( "shake", {times:2, distance: 2}, 400 );
-  $("[number='" + defenderIndex + "'] .charimg").effect( "shake", {times:2, distance: 2}, 400 );
 
-  // take counter attack
-  characters[characterIndex].health -= characters[defenderIndex].cap;
-  updateLife(characterIndex); 
+  // counter attack
+  setTimeout(function(){
+    shake(characterIndex);
+    animateDamage("#my-damage", characters[defenderIndex].cap);
+    // take damage
+    characters[characterIndex].health -= characters[defenderIndex].cap;
+    updateLife(characterIndex); 
+  }, 800);
+
+
+
   // raise character attack by base attack power
   characters[characterIndex].ap += characters[characterIndex].baseAP
 
@@ -139,28 +145,31 @@ $("#attack").click(function() {
 });
 
 
+function shake(charnumber) {
+  $("[number='" + charnumber + "'] .charimg").effect( "shake", {times:2, distance: 2}, 400 );
+}
 
-
+function animateDamage(id, amount){
+  $(id).show().html("-" + amount).animate({
+    opacity: 0,
+    marginTop: "30px"
+  }, 800, function () { $(this).removeAttr('style').hide(); });
+}
 
 function updateLife(number) {
-
-
+  // update HP number under character
   $("[number='" + number + "'] .hp-area").html("HP:" + characters[number].health +"/"+characters[number].hp);
-
-  // find character health
+  // find character health percent
   var percentHealth = characters[number].health/characters[number].hp*100;
-  // identify character life-bar
+  // find character life-bar element
   var $element = $("[number='" + number + "'] .life-bar");
-  // set width of life-bar
-  var progressBarWidth = percentHealth * $element.width()/100;
-
-  $element.find('div').animate({ width: progressBarWidth }, 300);
-  
+  // set width of life-bar element
+  $element.find('div').animate({ width: (percentHealth * $element.width()/100) }, 300);
+  // set life-bar color function
   function bgColor(color) {
-    $element.find('div').css("background-color", color); // green
+    $element.find('div').css("background-color", color);
   }
-
-  // color accordingly
+  // color range
   if (percentHealth === 100) {
     bgColor("#4caf50"); // green
   } else if (percentHealth > 60) {
@@ -176,10 +185,6 @@ function updateLife(number) {
   } else {
     bgColor("#f44336"); // red
   }
-
-
-
-
 }
 
 
