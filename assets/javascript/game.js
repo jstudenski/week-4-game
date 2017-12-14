@@ -87,10 +87,8 @@ $(".character").click(function() {
 
 
 $("#attack").click(function() {
- 
-  // console.log(characters);
-  // console.log("Attack: "+characters[characterIndex].ap);
-  // console.log("Enemy Attack: "+characters[defenderIndex].cap);
+
+  $("#attack").fadeOut(200);
 
   // attack
   shake(defenderIndex);
@@ -98,11 +96,13 @@ $("#attack").click(function() {
   // enemy take damage
   characters[defenderIndex].health -= characters[characterIndex].ap; 
   updateLife(defenderIndex);
-
+  battleUpdate(characters[defenderIndex].name + ' took ' +  characters[characterIndex].ap + ' damage');
+  
 
   // see if defender was defeated
   if (characters[defenderIndex].health <= 0) {
-    $("#notification").html(characters[defenderIndex].name +" was defeated. Pick a new enemy to fight!");
+    $("#notification").html("Pick a new enemy to fight!");
+    battleUpdate(characters[defenderIndex].name +" was defeated!");
     // hide attack button
 
     $("#attack").fadeOut(200);
@@ -126,12 +126,19 @@ $("#attack").click(function() {
     // take damage
     characters[characterIndex].health -= characters[defenderIndex].cap;
     updateLife(characterIndex); 
+    battleUpdate(characters[characterIndex].name + ' took ' +  characters[defenderIndex].cap + ' damage');
+
   }, 800);
 
 
+  setTimeout(function(){
+    // raise character attack by base attack power
+    characters[characterIndex].ap += characters[characterIndex].baseAP
+    battleUpdate(characters[characterIndex].name + "'s AP rose to "  + characters[characterIndex].ap)
+    animateAPrise("#my-damage", characters[characterIndex].baseAP);
+    $("#attack").fadeIn(200);
+  }, 2100);
 
-  // raise character attack by base attack power
-  characters[characterIndex].ap += characters[characterIndex].baseAP
 
   // check for defeat
   if (characters[characterIndex].health <= 0) {
@@ -145,16 +152,35 @@ $("#attack").click(function() {
 });
 
 
+
+
+
+
+
+function battleUpdate(message){
+  $('<li style="display: none;">'+message+'</li>').prependTo($("#battle-log")).slideDown(500);
+}
+
 function shake(charnumber) {
   $("[number='" + charnumber + "'] .charimg").effect( "shake", {times:2, distance: 2}, 400 );
 }
 
 function animateDamage(id, amount){
+  $(id).css('color','#ca0404');
   $(id).show().html("-" + amount).animate({
-    opacity: 0,
+    opacity: .2,
     marginTop: "30px"
-  }, 800, function () { $(this).removeAttr('style').hide(); });
+  }, 1200, function () { $(this).removeAttr('style').hide(); });
 }
+
+function animateAPrise(id, amount){
+  $(id).css('color','#76bfff');
+  $(id).show().html("+" + amount).animate({
+    opacity: .2,
+    marginTop: "30px"
+  }, 1200, function () { $(this).removeAttr('style').hide(); });
+}
+
 
 function updateLife(number) {
   // update HP number under character

@@ -28,22 +28,12 @@ body {
   margin: auto;
 }
 
-#my-damage {
-  color: #ca0404;
-  font-weight: 600;
-  margin-top: 51px;
-  margin-left: 45px;
-  font-size: 20px;
-  z-index: 1;
-  position: absolute;
-}
 
-#opponent-damage {
-  color: #ca0404;
+#opponent-damage, #my-damage {
   font-weight: 600;
   margin-top: 51px;
   margin-left: 45px;
-  font-size: 20px;
+  font-size: 25px;
   z-index: 1;
   position: absolute;
 }
@@ -230,6 +220,24 @@ body {
   display: block;
   margin-left: auto;
   margin-right: auto;
+}
+
+
+#battle-log {
+  padding: 5px;
+  line-height: 24px;
+  color: #fff;
+  list-style-type: none;
+}
+
+li:nth-child(2) {
+  color: #C0C0C0;
+}
+li:nth-child(3) {
+  color: #808080;
+}
+li:nth-child(4) {
+  color: #808080;
 }
 
 
