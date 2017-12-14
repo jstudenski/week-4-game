@@ -2,7 +2,6 @@ body {
   background-color: #999;
   font-family: 'Barlow Semi Condensed', sans-serif;
 }
-
 #notification {
   width: 422px;
   height: 30px;
@@ -13,8 +12,6 @@ body {
   box-sizing: border-box;
   margin: 50px auto 0 auto;
 }
-
-
 #attack {
   display: inline-block;
   border-radius: 5px;
@@ -28,8 +25,6 @@ body {
   width: 100px;
   margin: auto;
 }
-
-
 #opponent-damage, #my-damage, #my-ap {
   font-weight: 600;
   margin-top: 51px;
@@ -38,39 +33,37 @@ body {
   z-index: 1;
   position: absolute;
 }
-
-
-
-
-
 #attack p {
   display: inline-block;
   padding-left: 8px;
 }
-
 .fire {background-color: #f94c00;}
 .tint {background-color: #3498db;}
 .bolt {background-color: #f1c40f;}
 .leaf {background-color: #34bd77;}
 
+#characters, #enemies, .arena {
+  border: 1px solid #272727;
+  border-radius: 9px;
+  margin: 10px auto 0 auto;
+}
 #characters {
   background-color: #4b4b4b;
   width: 456px;
   height: 125px;
-  margin: 10px auto 0 auto;
-  border-radius: 9px;
-  border: 1px solid #272727;
 }
-
 #enemies {
   background-color: #4b4b4b;
   width: 343px;
-  margin: 10px auto 0 auto;
-  text-transform: uppercase;
   height: 145px;
-  border-radius: 9px;
+  text-transform: uppercase;
   overflow: hidden;
-  border: 1px solid #272727;
+}
+.arena {
+  width: 422px;
+  height: 147px;
+  box-sizing: border-box;
+  overflow: hidden;
 }
 
 .character {
@@ -79,30 +72,17 @@ body {
   height: 110px;
   background-color: #f1f1f1;
   float: left;
-  margin: 7px; 
+  margin: 7px;
   border: 1px solid #272727;
   box-sizing: border-box;
 }
-
-.character h3{
+.character h3 {
   height: 20px;
   padding-top: 3px;
   box-sizing: border-box;
   background-color: #272727;
   text-align: center;
   color: #ffffff;
-}
-
-
-
-.arena {
-  width: 422px;
-  height: 147px;
-  border: 1px solid #272727;
-  border-radius: 9px;
-  box-sizing: border-box;
-  overflow: hidden;
-  margin: 10px auto 0 auto;
 }
 
 .button-area {
@@ -113,9 +93,6 @@ body {
   border-bottom: 1px solid #4a4a4a;
   background-color: #262626;
 }
-
-
-
 .placeholder {
   width: 100px;
   height: 110px;
@@ -125,30 +102,25 @@ body {
   margin: 7px;
   position: absolute;
 }
-
 #defender {
   width: 115px;
   height: 145px;
   background-color: #4b4b4b;
   float: right;
 }
-
 #your-character {
   width: 115px;
   height: 145px;
   background-color: #4b4b4b;
   float: left;
 }
-
-
-
 #battle-update {
-  width: 190px;;
+  width: 190px;
+  ;
   height: 145px;
   background-color: #1e1e1e;
   float: left;
 }
-
 #your-character p, #defender p, #battle-update h4, #enemies h4 {
   font-size: 14px;
   color: #fff;
@@ -157,30 +129,16 @@ body {
   height: 22px;
   text-align: center;
   background-color: #191919;
-  background-image: -webkit-gradient(linear,left top,left bottom,from(#282828),to(#191919));
-  background-image: -webkit-linear-gradient(top,#282828,#191919);
-  background-image: linear-gradient(top,#282828,#191919);
+  background-image: -webkit-gradient(linear, left top, left bottom, from(#282828), to(#191919));
+  background-image: -webkit-linear-gradient(top, #282828, #191919);
+  background-image: linear-gradient(top, #282828, #191919);
 }
-
-#battle-update h4{ 
+#battle-update h4 {
   text-transform: uppercase;
 }
-
 #your-character p, #defender p {
   color: #b6b6b6;
 }
-
-
-/*#your-character p {
-  border-radius: 10px 0px 0px 10px;
-}
-#defender p {
-  border-radius: 0px 10px 10px 0px;
-}*/
-
-
-
-
 .life-bar {
   width: 100%;
   height: 8px;
@@ -190,12 +148,9 @@ body {
   position: absolute;
   bottom: 0px;
 }
-
 .life-bar div {
   height: 100%;
 }
-
-
 .hp-area {
   height: 17px;
   width: 100%;
@@ -205,36 +160,27 @@ body {
   color: #000;
   text-align: center;
 }
-
 .container {
-/*  background-color: blue;*/
   height: 63px;
   position: relative;
 }
-
 .charimg {
-/*  background-color: salmon;*/
   position: absolute;
   width: 100%;
   bottom: 0px;
 }
-
-.charimg img{
+.charimg img {
   max-height: 55px;
-/*  background-color: yellow;*/
   display: block;
   margin-left: auto;
   margin-right: auto;
 }
-
-
 #battle-log {
   padding: 5px;
   line-height: 24px;
   color: #fff;
   list-style-type: none;
 }
-
 li:nth-child(2) {
   color: #C0C0C0;
 }
@@ -244,6 +190,3 @@ li:nth-child(3) {
 li:nth-child(4) {
   color: #808080;
 }
-
-
-

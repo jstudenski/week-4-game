@@ -3,57 +3,42 @@
 <head>
   <meta charset="UTF-8">
   <title>Week 4 Game</title>
-  <script src="assets/javascript/game.js"></script>
+  <script src="assets/javascript/game.js">
+  </script>
   <link href="assets/css/reset.css" rel="stylesheet" type="text/css">
   <link href="assets/css/style.css" rel="stylesheet" type="text/css">
   <link href="https://fonts.googleapis.com/css?family=Barlow+Semi+Condensed" rel="stylesheet">
 </head>
 <body>
-
-<div id="notification"></div>
-
-<div id="characters"></div>
-
-<div class="arena">
-  
-  <div id="your-character">
-    <p>your character</p>
-    <div id="my-damage"></div>
-    <div id="my-ap"></div>
-    <div class="placeholder"></div>
-  </div>
-  
-  <div id="battle-update">
-    <h4></h4>
-    <div class="button-area">
-      <div id="attack"></div>
+  <div id="notification"></div>
+  <div id="characters"></div>
+  <div class="arena">
+    <div id="your-character">
+      <p>your character</p>
+      <div id="my-damage"></div>
+      <div id="my-ap"></div>
+      <div class="placeholder"></div>
     </div>
-    <div id="battle-log"><ul></ul></div>
+    <div id="battle-update">
+      <h4></h4>
+      <div class="button-area">
+        <div id="attack"></div>
+      </div>
+      <div id="battle-log">
+        <ul></ul>
+      </div>
+    </div>
+    <div id="defender">
+      <p>opponent</p>
+      <div id="opponent-damage"></div>
+      <div class="placeholder"></div>
+    </div>
   </div>
-
-  <div id="defender">
-    <p>opponent</p>
-    <div id="opponent-damage"></div>
-    <div class="placeholder"></div>
+  <div id="enemies">
+    <h4>enemies</h4>
   </div>
-</div>
-
-
-
- 
-<div id="enemies">
- <h4>enemies</h4>
-</div>
-
-
-
-
-<script defer src="https://use.fontawesome.com/releases/v5.0.1/js/all.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<script
-  src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"
-  integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU="
-  crossorigin="anonymous"></script>
-
+  <script defer src="https://use.fontawesome.com/releases/v5.0.1/js/all.js"></script> 
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script> 
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
 </body>
 </html>

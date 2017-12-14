@@ -1,7 +1,7 @@
 window.onload = function() {
 
 var characters = [
-  {"name":"Pikachu", "hp":100, "ap":100, "cap":50, "image":"", "bg":"#ffeb3b", "attack":"bolt"},
+  {"name":"Pikachu", "hp":100, "ap":15, "cap":50, "image":"", "bg":"#ffeb3b", "attack":"bolt"},
   {"name":"Squirtle", "hp":120, "ap":8, "cap":25, "image":"", "bg":"#488cc7", "attack":"tint"},
   {"name":"Charmander", "hp":130, "ap":7, "cap":20, "image":"", "bg":"#ff9b00", "attack":"fire"},
   {"name":"Bulbasaur", "hp":150, "ap":5, "cap":10, "image":"", "bg":"#05ab64", "attack":"leaf"}
@@ -123,7 +123,6 @@ function runAttack() {
 
 
 
-
 function battleUpdate(message){
   $('<li style="display: none;">'+message+'</li>').prependTo($("#battle-log")).slideDown(500);
 }
@@ -179,9 +178,6 @@ function updateLife(number) {
     bgColor("#f44336"); // red
   }
 }
-
-
-
 
 
 $("#notification").html("Choose a character");
