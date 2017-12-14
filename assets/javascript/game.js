@@ -1,37 +1,17 @@
 window.onload = function() {
 
-
 var characters = [
-  {"name":"Pikachu", "hp":100, "ap":10, "cap":50, "image":"", "bg":"#ffeb3b", "attack":"bolt"},
+  {"name":"Pikachu", "hp":100, "ap":100, "cap":50, "image":"", "bg":"#ffeb3b", "attack":"bolt"},
   {"name":"Squirtle", "hp":120, "ap":8, "cap":25, "image":"", "bg":"#488cc7", "attack":"tint"},
   {"name":"Charmander", "hp":130, "ap":7, "cap":20, "image":"", "bg":"#ff9b00", "attack":"fire"},
   {"name":"Bulbasaur", "hp":150, "ap":5, "cap":10, "image":"", "bg":"#05ab64", "attack":"leaf"}
 ];
 var characterIndex;
 var defenderIndex;
-
-$("#notification").html("Choose a character");
-$("#attack").hide();
-
-$.each( characters, function( key, value ) {
-  value.health = value.hp; // set characters health equal to total hp
-  // add characters to html
-  var $div = $("<div>", {"number": key, "class": "character"});
-  $div.html('<h3>' + characters[key].name + '</h3>');
-  $div.append('<div class="container"><div class="charimg"><img src="assets/images/' + characters[key].name + '.gif"></div></div>');
-  $div.append('<div class="hp-area"></div>');
-  $div.append('<div class="life-bar"><div></div></div>');
-  $("#characters").append($div);
-   // update life bar
-  updateLife(key);
-});
+var remainingEnemies = characters.length-1;
 
 
-
-
-
-$(".character").click(function() {
-
+function click(){
   // pick a character
   if (characterIndex === undefined) {
     characterIndex = $(this).attr('number');
@@ -44,26 +24,23 @@ $(".character").click(function() {
     $("[number='" + characterIndex + "']").hide().appendTo("#your-character").fadeIn('slow');
     // Set background color
     $("[number='" + characterIndex + "'] .charimg").html('<img src="assets/images/' + characters[characterIndex].name + 'back.gif">');
-
-
     // Move ramaining characters to enemies area
     $("#characters").children().hide().appendTo("#enemies").fadeIn('slow');
 
     // hide characters area 
     $("#characters").animate({
     height: "0",
-    margin: "0",
-    opacity: "0"
+    opacity: "0",
+    marginTop: "0",
     }, 800 );
 
     $("#notification").html("Choose an opponant");
 
     // Set unique attack button properties
     var attack = characters[characterIndex].attack
-    $("#attack").addClass(attack);
-    $("#attack").append("<i></i>");
+
+    $("#attack").append("<i></i><p>Attack</>").addClass(attack).click(runAttack);
     $("#attack i").addClass("fas fa-"+attack);
-    $("#attack").append("<p>Attack</>");
   
   // Pick new defender
   } else if (defenderIndex === undefined) {  
@@ -80,16 +57,12 @@ $(".character").click(function() {
     $("#battle-update h4").html(characters[characterIndex].name + " -vs- " + characters[defenderIndex].name);
     $("#attack").fadeIn(300);
   }
+}
 
 
-});
-
-
-
-$("#attack").click(function() {
-
+function runAttack() {
+  // hide button
   $("#attack").fadeOut(200);
-
   // attack
   shake(defenderIndex);
   animateDamage("#opponent-damage", characters[characterIndex].ap);
@@ -97,62 +70,56 @@ $("#attack").click(function() {
   characters[defenderIndex].health -= characters[characterIndex].ap; 
   updateLife(defenderIndex);
   battleUpdate(characters[defenderIndex].name + ' took ' +  characters[characterIndex].ap + ' damage');
-  
 
-  // see if defender was defeated
+  // see if enemy was defeated
   if (characters[defenderIndex].health <= 0) {
+    setTimeout(function(){
     $("#notification").html("Pick a new enemy to fight!");
     battleUpdate(characters[defenderIndex].name +" was defeated!");
+    remainingEnemies--
     // hide attack button
-
-    $("#attack").fadeOut(200);
-    // remove character
+    $("#attack").fadeOut(100);
+    // remove defeated enemy
     $("[number='" + defenderIndex + "']").fadeOut(900);
     // set defenderIndex back to undefined
     defenderIndex = undefined;
-    
     // check for win
-    if ($("#enemies").is(':empty')) {
-      $("#notification").html("YOU WIN!!!");
-      $("#attack").fadeOut(200);
-    }
-    return;
-  } 
+    }, 800);
+    setTimeout(function(){
+      if (remainingEnemies === 0) {
+        $("#notification").html("You Win!");
+        battleUpdate("No enemies left. You Win!");
+        $("#attack").fadeOut(200); 
+      };
+    }, 1600);
+  } else {
+    // counter attack
+    setTimeout(function(){
+      shake(characterIndex);
+      animateDamage("#my-damage", characters[defenderIndex].cap);
+      // take damage
+      characters[characterIndex].health -= characters[defenderIndex].cap;
+      updateLife(characterIndex); 
+      battleUpdate(characters[characterIndex].name + ' took ' +  characters[defenderIndex].cap + ' damage');
 
-  // counter attack
-  setTimeout(function(){
-    shake(characterIndex);
-    animateDamage("#my-damage", characters[defenderIndex].cap);
-    // take damage
-    characters[characterIndex].health -= characters[defenderIndex].cap;
-    updateLife(characterIndex); 
-    battleUpdate(characters[characterIndex].name + ' took ' +  characters[defenderIndex].cap + ' damage');
-
-  }, 800);
-
-
-  setTimeout(function(){
-    // raise character attack by base attack power
-    characters[characterIndex].ap += characters[characterIndex].baseAP
-    battleUpdate(characters[characterIndex].name + "'s AP rose to "  + characters[characterIndex].ap)
-    animateAPrise("#my-damage", characters[characterIndex].baseAP);
-    $("#attack").fadeIn(200);
-  }, 2100);
-
-
-  // check for defeat
-  if (characters[characterIndex].health <= 0) {
-    $("#notification").html("You have been defeated!!");
-    $("#attack").fadeOut(200);
-    $("[number='" + characterIndex + "']").fadeOut(900);
+      // check for defeat
+      if (characters[characterIndex].health <= 0) {
+        $("#notification").html("You have been defeated!!");
+        battleUpdate(characters[characterIndex].name +" was defeated!");
+        $("#attack").fadeOut(200);
+        $("[number='" + characterIndex + "']").fadeOut(900);
+      } else {
+        setTimeout(function(){
+          // raise character attack by base attack power
+          characters[characterIndex].ap += characters[characterIndex].baseAP
+          battleUpdate(characters[characterIndex].name + "'s AP rose to "  + characters[characterIndex].ap)
+          animateAPrise(characters[characterIndex].baseAP);
+          $("#attack").fadeIn(200);
+        }, 800);
+      }
+    }, 800);
   }
-
-
-
-});
-
-
-
+}
 
 
 
@@ -170,17 +137,17 @@ function animateDamage(id, amount){
   $(id).show().html("-" + amount).animate({
     opacity: .2,
     marginTop: "30px"
-  }, 1200, function () { $(this).removeAttr('style').hide(); });
+  }, 1400, function () { $(this).removeAttr('style').hide(); });
 }
 
-function animateAPrise(id, amount){
-  $(id).css('color','#76bfff');
-  $(id).show().html("+" + amount).animate({
+function animateAPrise(amount){
+  console.log("worked");
+  $("#my-ap").css('color','#76bfff');
+  $("#my-ap").show().html("+" + amount).animate({
     opacity: .2,
     marginTop: "30px"
-  }, 1200, function () { $(this).removeAttr('style').hide(); });
+  }, 1400, function () { $(this).removeAttr('style').hide(); });
 }
-
 
 function updateLife(number) {
   // update HP number under character
@@ -214,6 +181,24 @@ function updateLife(number) {
 }
 
 
+
+
+
+$("#notification").html("Choose a character");
+$("#attack").hide();
+
+// create character divs
+$.each( characters, function( key, value ) {
+  value.health = value.hp; // set characters health equal to total hp
+  // add characters to html
+  var $div = $("<div>", {"number": key, "class": "character"}).click(click);
+  $div.html('<h3>' + characters[key].name + '</h3>');
+  $div.append('<div class="container"><div class="charimg"><img src="assets/images/' + characters[key].name + '.gif"></div></div>');
+  $div.append('<div class="hp-area"></div><div class="life-bar"><div></div></div>');
+  $("#characters").append($div);
+  // update life bar
+  updateLife(key);
+});
 
 
 
