@@ -23,10 +23,9 @@ function click(){
     // Move your character to your character area
     $("[number='" + characterIndex + "']").hide().appendTo("#your-character").fadeIn('slow');
     // Set background color
-    $("[number='" + characterIndex + "'] .charimg").html('<img src="assets/images/' + characters[characterIndex].name + 'back.gif">');
+    $("[number='" + characterIndex + "'] .charimg").html('<img src="assets/images/' + characters[characterIndex].name.toLowerCase() + 'back.gif">');
     // Move ramaining characters to enemies area
     $("#characters").children().hide().appendTo("#enemies").fadeIn('slow');
-
     // hide characters area 
     $("#characters").animate({
     height: "0",
@@ -189,7 +188,7 @@ $.each( characters, function( key, value ) {
   // add characters to html
   var $div = $("<div>", {"number": key, "class": "character"}).click(click);
   $div.html('<h3>' + characters[key].name + '</h3>');
-  $div.append('<div class="container"><div class="charimg"><img src="assets/images/' + characters[key].name + '.gif"></div></div>');
+  $div.append('<div class="container"><div class="charimg"><img src="assets/images/' + characters[key].name.toLowerCase() + '.gif"></div></div>');
   $div.append('<div class="hp-area"></div><div class="life-bar"><div></div></div>');
   $("#characters").append($div);
   // update life bar
