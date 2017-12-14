@@ -1,10 +1,10 @@
 window.onload = function() {
 
 var characters = [
-  {"name":"Pikachu", "hp":100, "ap":15, "cap":50, "image":"", "bg":"#ffeb3b", "attack":"bolt"},
-  {"name":"Squirtle", "hp":120, "ap":8, "cap":25, "image":"", "bg":"#488cc7", "attack":"tint"},
-  {"name":"Charmander", "hp":130, "ap":7, "cap":20, "image":"", "bg":"#ff9b00", "attack":"fire"},
-  {"name":"Bulbasaur", "hp":150, "ap":5, "cap":10, "image":"", "bg":"#05ab64", "attack":"leaf"}
+  {"name":"Pikachu", "hp":100, "ap":14, "cap":40, "image":"", "bg":"#ffeb3b", "attack":"bolt"},
+  {"name":"Squirtle", "hp":120, "ap":12, "cap":25, "image":"", "bg":"#488cc7", "attack":"tint"},
+  {"name":"Charmander", "hp":130, "ap":10, "cap":15, "image":"", "bg":"#ff9b00", "attack":"fire"},
+  {"name":"Bulbasaur", "hp":150, "ap":8, "cap":10, "image":"", "bg":"#05ab64", "attack":"leaf"}
 ];
 var characterIndex;
 var defenderIndex;
